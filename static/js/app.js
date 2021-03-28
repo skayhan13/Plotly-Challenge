@@ -131,8 +131,7 @@ function getInfo(id) {
 
         // filter meta data info by id
         var result = metadata.filter(meta => meta.id.toString() === id)[0];
-
-        console.log(result)
+        //console.log(result)
 
         // select demographic panel to put data
         var demographicInfo = d3.select("#sample-metadata");
