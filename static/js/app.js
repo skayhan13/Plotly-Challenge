@@ -2,15 +2,18 @@
 function getPlot(id) {
     // getting data from the json file
     d3.json("samples.json").then((data)=> {
-        console.log(data)
+        //console.log(data)
   
         var wfreq = data.metadata.map(d => d.wfreq)
-        console.log(`Washing Freq: ${wfreq}`)
+        //console.log(`Washing Freq: ${wfreq}`)
         
         // filter sample values by id 
         var samples = data.samples.filter(s => s.id.toString() === id)[0];
-        
-        console.log(samples);
+        //console.log(samples);
+
+        // Creating filter gauge 
+        var metadata = data.metadata;
+        var result = metadata.filter(meta => meta.id.toString() === id)[0];
   
         // Getting the top 10 
         var samplevalues = samples.sample_values.slice(0, 10).reverse();
@@ -22,8 +25,7 @@ function getPlot(id) {
         var OTU_id = OTU_top.map(d => "OTU " + d)
   
       //   console.log(`OTU IDS: ${OTU_id}`)
-  
-  
+
         // get the top 10 labels for the plot
         var labels = samples.otu_labels.slice(0, 10);
   
@@ -88,12 +90,12 @@ function getPlot(id) {
         // create the bubble plot
         Plotly.newPlot("bubble", data1, layout_b); 
   
-        // The guage chart
+        // The gauge chart
   
         var data_g = [
           {
           domain: {x: [0, 1], y: [0, 1]},
-          value: parseFloat(wfreq),
+          value: parseFloat(result.wfreq),
           title: {text: `Weekly Washing Frequency`},
           type: "indicator",
           
@@ -125,10 +127,12 @@ function getInfo(id) {
         // get the metadata info for the demographic panel
         var metadata = data.metadata;
 
-        console.log(metadata)
+        //console.log(metadata)
 
         // filter meta data info by id
         var result = metadata.filter(meta => meta.id.toString() === id)[0];
+
+        console.log(result)
 
         // select demographic panel to put data
         var demographicInfo = d3.select("#sample-metadata");
@@ -155,8 +159,8 @@ function init() {
     var dropdown = d3.select("#selDataset"); 
 
     // read the data 
-    d3.json("samples.json").then((data)=> {  //ERROR HERE do i need a .on ?
-        console.log(data)
+    d3.json("samples.json").then((data)=> { 
+        //console.log(data)
 
         // get the id data to the dropdwown menu
         data.names.forEach(function(name) {
@@ -170,4 +174,4 @@ function init() {
 }
 
 // Initialize the dashboard
-init();  //ERROR HERE bc promise is not met when calling function 
+init(); 
