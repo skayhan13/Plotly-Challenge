@@ -1,5 +1,7 @@
 # Plotly-Challenge
 
+A Plotly dashboard within a Flask app deployed to Github pages at: https://skayhan13.github.io/Plotly-Challenge/.
+
  ![Bacteria by filterforge.com](Images/bacteria.jpg)
 
 In this assignment, you will build an interactive dashboard to explore the [Belly Button Biodiversity dataset](http://robdunnlab.com/projects/belly-button-biodiversity/), which catalogs the microbes that colonize human navels.
